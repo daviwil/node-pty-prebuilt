@@ -1,8 +1,8 @@
 {
-  "name": "node-pty",
+  "name": "node-pty-prebuilt",
   "description": "Fork pseudoterminals in Node.JS",
   "author": {
-    "name": "Daniel Imms"
+    "name": "David Wilson"
   },
   "version": "0.7.3",
   "license": "MIT",
@@ -10,7 +10,7 @@
   "types": "./lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Tyriar/node-pty.git"
+    "url": "git://github.com/daviwil/node-pty-prebuilt.git"
   },
   "files": [
     "binding.gyp",
@@ -19,9 +19,9 @@
     "src/",
     "deps/"
   ],
-  "homepage": "https://github.com/Tyriar/node-pty",
+  "homepage": "https://github.com/daviwil/node-pty-prebuilt",
   "bugs": {
-    "url": "https://github.com/Tyriar/node-pty/issues"
+    "url": "https://github.com/daviwil/node-pty-prebuilt/issues"
   },
   "keywords": [
     "pty",
@@ -48,6 +48,7 @@
     "cross-env": "^3.2.4",
     "mocha": "^3.1.2",
     "pollUntil": "^1.0.3",
+    "prebuild": "^7.0.0",
     "tslint": "^4.3.1",
     "typescript": "^2.1.4"
   }
