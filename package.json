@@ -34,13 +34,14 @@
   "scripts": {
     "tsc": "tsc",
     "tslint": "tslint src/**/*.ts",
-    "install": "node scripts/install.js",
+    "install": "prebuild-install || node scripts/install.js",
     "postinstall": "node scripts/post-install.js",
     "test": "cross-env NODE_ENV=test mocha -R spec lib/*.test.js",
     "prepublish": "npm run tsc"
   },
   "dependencies": {
-    "nan": "^2.6.2"
+    "nan": "^2.6.2",
+    "prebuild-install": "^2.4.1"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.41",
