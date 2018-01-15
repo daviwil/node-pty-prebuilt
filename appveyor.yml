@@ -3,8 +3,4 @@ install:
 
 build_script:
   - npm install
-
-test_script:
-  - node --version
-  - npm --version
-  - npm test
+  - node node_modules/prebuild/bin.js -t 1.6.15 -t 1.7.10 -r electron -u %GITHUB_RELEASE_TOKEN%
