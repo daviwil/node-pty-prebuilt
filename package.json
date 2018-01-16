@@ -1,6 +1,6 @@
 {
   "name": "node-pty-prebuilt",
-  "description": "Fork pseudoterminals in Node.JS",
+  "description": "A parallel fork of node-pty providing prebuilt packages for Node.js and Electron",
   "author": {
     "name": "David Wilson"
   },
