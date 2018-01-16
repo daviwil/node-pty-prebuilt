@@ -1,81 +1,43 @@
-# node-pty
+# node-pty-prebuilt
 
-[![Travis CI build status](https://travis-ci.org/Tyriar/node-pty.svg?branch=master)](https://travis-ci.org/Tyriar/node-pty)
-[![Appveyor build status](https://ci.appveyor.com/api/projects/status/1064dcr2t2r90q4n/branch/master?svg=true)](https://ci.appveyor.com/project/Tyriar/node-pty/branch/master)
+This project is a parallel fork of [`node-pty`](https://github.com/Tyriar/node-pty)
+providing prebuilt packages for certain Node.js and Electron versions.
 
-`forkpty(3)` bindings for node.js. This allows you to fork processes with pseudoterminal file descriptors. It returns a terminal object which allows reads and writes.
+## Usage
 
-This is useful for:
+Thanks to the excellent [`prebuild`](https://github.com/prebuild/prebuild) and
+[`prebuild-install`](https://github.com/prebuild/prebuild) modules, using this module
+is extremely easy.  You merely have to change your `node-pty` dependency to
+`node-pty-prebuilt` and then change any `require` statements in your code from
+`require('node-pty')` to `require('node-pty-prebuilt')`.
 
-- Writing a terminal emulator (eg. via [xterm.js](https://github.com/sourcelair/xterm.js)).
-- Getting certain programs to *think* you're a terminal, such as when you need a program to send you control sequences.
+> **NOTE**: We started shipping prebuilds as of node-pty version 0.7.3, no prior versions
+> are provided!  If you were using an earlier version of `node-pty` you will need
+> to update your code to account for any API changes that may have occurred.
 
-`node-pty` supports Linux, macOS and Windows. Windows support is possible by utilizing the [winpty](https://github.com/rprichard/winpty) library.
+## How It Works
 
-## Real-world Uses
+We maintain a parallel fork of the `node-pty` codebase that will be updated as new
+releases are shipped.  When we merge new updates to the code into the `prebuild`
+branch, new prebuilt packages for our supported Node.js and Electron versions
+are updated to the corresponding [GitHub release](https://github.com/daviwil/node-pty-prebuilt/releases).
 
-`node-pty` powers many different terminal emulators, including:
+When `node-pty-prebuilt` is installed as a package dependency, the
+[`install` script](https://github.com/daviwil/node-pty-prebuilt/blob/prebuild/package.json#L37)
+checks to see if there's a prebuilt package on this repo for the OS, ABI version,
+and architecture of the current process and then downloads it, extracting it into
+the module path.  If a corresponding prebuilt package is not found, `node-gyp`
+is invoked to build the package for the current platform.
 
-- [Microsoft Visual Studio Code](https://code.visualstudio.com)
-- [Hyper](https://hyper.is/)
-- [Upterm](https://github.com/railsware/upterm)
-- [Script Runner](https://github.com/ioquatix/script-runner) for Atom.
-- [Theia](https://github.com/theia-ide/theia)
-- [FreeMAN](https://github.com/matthew-matvei/freeman) file manager
+## Prebuilt Versions
 
-Do you use node-pty in your application as well? Please open a [Pull Request](https://github.com/Tyriar/node-pty/pulls) to include it here. We would love to have it in our list.
-
-## Example Usage
-
-```js
-var os = require('os');
-var pty = require('node-pty');
-
-var shell = os.platform() === 'win32' ? 'powershell.exe' : 'bash';
-
-var ptyProcess = pty.spawn(shell, [], {
-  name: 'xterm-color',
-  cols: 80,
-  rows: 30,
-  cwd: process.env.HOME,
-  env: process.env
-});
-
-ptyProcess.on('data', function(data) {
-  console.log(data);
-});
-
-ptyProcess.write('ls\r');
-ptyProcess.resize(100, 40);
-ptyProcess.write('ls\r');
-```
-
-## Building
-
-```bash
-# Install dependencies and build C++
-npm install
-# Compile TypeScript -> JavaScript
-npm run tsc
-```
-
-## Debugging
-
-On Windows, you can show the winpty agent console window by adding the environment variable `WINPTY_SHOW_CONSOLE=1` to the pty's environment. See https://github.com/rprichard/winpty#debugging-winpty for more information.
-
-## Troubleshooting
-
-**Powershell gives error 8009001d**
-
-> Internal Windows PowerShell error.  Loading managed Windows PowerShell failed with error 8009001d.
-
-This happens when PowerShell is launched with no `SystemRoot` environment variable present.
-
-## pty.js
-
-This project is forked from [chjj/pty.js](https://github.com/chjj/pty.js) with the primary goals being to provide better support for later Node.JS versions and Windows.
+We currently build packages for all versions of Node.js and Electron that are
+supported by the `prebuild` module.  You can see the full list of versions by checking
+out the [`supportedTargets`](https://github.com/lgeiger/node-abi/blob/master/index.js#L51)
+list in [`node-abi`](https://github.com/lgeiger/node-abi/blob/master/index.js#L51).
 
 ## License
 
 Copyright (c) 2012-2015, Christopher Jeffrey (MIT License).
 Copyright (c) 2016, Daniel Imms (MIT License).
+Copyright (c) 2018, David Wilson (MIT License).
