@@ -3,4 +3,5 @@ install:
 
 build_script:
   - npm install
-  - node node_modules/prebuild/bin.js -t 1.6.15 -t 1.7.10 -r electron -u %GITHUB_RELEASE_TOKEN%
+  - node node_modules/prebuild/bin.js --all --collect-files-filter "\.(node|exe|dll|pdb)$" -u %GITHUB_RELEASE_TOKEN%
+  - node node_modules/prebuild/bin.js --all -a ia32 --collect-files-filter "\.(node|exe|dll|pdb)$" -u %GITHUB_RELEASE_TOKEN%
