@@ -6,7 +6,7 @@ branches:
   only:
   - prebuild
 node_js:
-  - "7"
+  - "10"
 install:
   - npm install
   - npm run tsc
