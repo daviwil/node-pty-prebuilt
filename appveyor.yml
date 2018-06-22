@@ -3,7 +3,7 @@ branches:
   - prebuild
 
 install:
-  - ps: Install-Product node 10.5.0 x64
+  - ps: Install-Product node 10.3.0 x64
 
 build_script:
   - npm install
