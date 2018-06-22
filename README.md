@@ -3,7 +3,7 @@
 [![Travis CI build status](https://travis-ci.org/daviwil/node-pty-prebuilt.svg?branch=prebuild)](https://travis-ci.org/daviwil/node-pty-prebuilt)
 [![Appveyor build status](https://ci.appveyor.com/api/projects/status/9auevc5p115y7x6i/branch/prebuild?svg=true)](https://ci.appveyor.com/project/daviwil/node-pty-prebuilt/branch/prebuild)
 
-This project is a parallel fork of [`node-pty`](https://github.com/Tyriar/node-pty)
+This project is a parallel fork of [`node-pty`](https://github.com/Microsoft/node-pty)
 providing prebuilt packages for certain Node.js and Electron versions.
 
 ## Usage
