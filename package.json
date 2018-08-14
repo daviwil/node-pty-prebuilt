@@ -4,7 +4,7 @@
   "author": {
     "name": "David Wilson"
   },
-  "version": "0.7.5",
+  "version": "0.7.6",
   "license": "MIT",
   "main": "./lib/index.js",
   "types": "./typings/node-pty.d.ts",
@@ -17,7 +17,8 @@
     "lib/",
     "scripts/",
     "src/",
-    "deps/"
+    "deps/",
+    "typings/"
   ],
   "homepage": "https://github.com/daviwil/node-pty-prebuilt",
   "bugs": {
