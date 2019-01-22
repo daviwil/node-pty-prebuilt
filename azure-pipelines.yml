@@ -45,6 +45,10 @@ jobs:
     inputs:
       versionSpec: '8.x'
     displayName: 'Install Node.js'
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '2.7'
+      architecture: 'x64'
   - script: |
       npm i
     displayName: 'Install dependencies and build'
