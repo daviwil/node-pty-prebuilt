@@ -16,11 +16,11 @@ jobs:
       npm i
     displayName: 'Install dependencies and build'
   - script: |
-      npm test
-    displayName: 'Test'
-  - script: |
-      npm run lint
-    displayName: 'Lint'
+      npx prebuild --all -u $GITHUB_RELEASE_TOKEN
+      npx prebuild --all -a ia32 -u $GITHUB_RELEASE_TOKEN
+    env:
+      GITHUB_RELEASE_TOKEN: $(GITHUB_RELEASE_TOKEN)
+    displayName: 'Prebuild and publish'
 - job: macOS
   pool:
     vmImage: 'xcode9-macos10.13'
@@ -33,11 +33,10 @@ jobs:
       npm i
     displayName: 'Install dependencies and build'
   - script: |
-      npm test
-    displayName: 'Test'
-  - script: |
-      npm run lint
-    displayName: 'Lint'
+      npx prebuild --all -u $GITHUB_RELEASE_TOKEN
+    env:
+      GITHUB_RELEASE_TOKEN: $(GITHUB_RELEASE_TOKEN)
+    displayName: 'Prebuild and publish'
 - job: Windows
   pool:
     vmImage: 'vs2017-win2016'
@@ -50,8 +49,8 @@ jobs:
       npm i
     displayName: 'Install dependencies and build'
   - script: |
-      npm test
-    displayName: 'Test'
-  - script: |
-      npm run lint
-    displayName: 'Lint'
+      npx prebuild --all --include-regex "\.(node|exe|dll|pdb)$" -u %GITHUB_RELEASE_TOKEN%
+      npx prebuild --all -a ia32 --include-regex "\.(node|exe|dll|pdb)$" -u %GITHUB_RELEASE_TOKEN%
+    env:
+      GITHUB_RELEASE_TOKEN: $(GITHUB_RELEASE_TOKEN)
+    displayName: 'Prebuild and publish'
