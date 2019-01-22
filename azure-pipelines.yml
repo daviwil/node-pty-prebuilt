@@ -13,6 +13,7 @@ jobs:
       versionSpec: '8.x'
     displayName: 'Install Node.js'
   - script: |
+      sudo apt-get -qq install g++-multilib
       npm i
     displayName: 'Install dependencies and build'
   - script: |
