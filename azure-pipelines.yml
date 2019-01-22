@@ -54,6 +54,7 @@ jobs:
       npm i
     displayName: 'Install dependencies and build'
   - script: |
+      npm config set msvs_version 2017
       npx prebuild --all --include-regex "\.(node|exe|dll|pdb)$" -u %GITHUB_RELEASE_TOKEN%
       npx prebuild --all -a ia32 --include-regex "\.(node|exe|dll|pdb)$" -u %GITHUB_RELEASE_TOKEN%
     env:
