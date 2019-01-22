@@ -8,11 +8,9 @@
   },
   "repository": "https://github.com/Tyriar/node-pty",
   "author": "Tyriar",
-  "devDependencies": {
-    "electron": "1.8.4"
-  },
   "dependencies": {
-    "node-pty": "^0.7.4",
-    "xterm": "^3.3.0"
+    "electron": "^4.0.1",
+    "node-pty": "^0.8.0",
+    "xterm": "3.10.1"
   }
 }

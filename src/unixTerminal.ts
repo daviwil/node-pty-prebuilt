@@ -1,24 +1,16 @@
 /**
  * Copyright (c) 2012-2015, Christopher Jeffrey (MIT License)
  * Copyright (c) 2016, Daniel Imms (MIT License).
+ * Copyright (c) 2018, Microsoft Corporation (MIT License).
  */
 
 import * as net from 'net';
-import * as path from 'path';
-import * as tty from 'tty';
-import * as os from 'os';
 import { Terminal, DEFAULT_COLS, DEFAULT_ROWS } from './terminal';
 import { IProcessEnv, IPtyForkOptions, IPtyOpenOptions } from './interfaces';
 import { ArgvOrCommandLine } from './types';
-import { assign } from './utils';
+import { assign, loadNative } from './utils';
 
-declare interface INativePty {
-  master: number;
-  slave: number;
-  pty: string;
-}
-
-const pty = require(path.join('..', 'build', 'Release', 'pty.node'));
+const pty: IUnixNative = loadNative('pty');
 
 const DEFAULT_FILE = 'sh';
 const DEFAULT_NAME = 'xterm';
@@ -180,7 +172,7 @@ export class UnixTerminal extends Terminal {
     const encoding = opt.encoding ? 'utf8' : opt.encoding;
 
     // open
-    const term: INativePty = pty.open(cols, rows);
+    const term: IUnixOpenProcess = pty.open(cols, rows);
 
     self._master = new PipeSocket(<number>term.master);
     self._master.setEncoding(encoding);
@@ -231,20 +223,10 @@ export class UnixTerminal extends Terminal {
     this._socket.destroy();
   }
 
-  public kill(signal: string = 'SIGHUP'): void {
-    if (signal in os.constants.signals) {
-      try {
-        // pty.kill will not be available on systems which don't support
-        // the TIOCSIG/TIOCSIGNAL ioctl
-        if (pty.kill && signal !== 'SIGHUP') {
-          pty.kill(this._fd, os.constants.signals[signal]);
-        } else {
-          process.kill(this.pid, signal);
-        }
-      } catch (e) { /* swallow */ }
-    } else {
-      throw new Error('Unknown signal: ' + signal);
-    }
+  public kill(signal?: string): void {
+    try {
+      process.kill(this.pid, signal || 'SIGHUP');
+    } catch (e) { /* swallow */ }
   }
 
   /**

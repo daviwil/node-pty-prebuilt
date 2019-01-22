@@ -43,4 +43,5 @@ list in [`node-abi`](https://github.com/lgeiger/node-abi/blob/master/index.js#L5
 
 Copyright (c) 2012-2015, Christopher Jeffrey (MIT License).
 Copyright (c) 2016, Daniel Imms (MIT License).
+Copyright (c) 2018, Microsoft Corporation (MIT License).
 Copyright (c) 2018, David Wilson (MIT License).

@@ -1,5 +1,6 @@
 /**
  * Copyright (c) 2017, Daniel Imms (MIT License).
+ * Copyright (c) 2018, Microsoft Corporation (MIT License).
  */
 
 declare module 'node-pty' {
@@ -25,6 +26,14 @@ declare module 'node-pty' {
     uid?: number;
     gid?: number;
     encoding?: string;
+    /**
+     * Whether to use the experimental ConPTY system on Windows. When this is not set, ConPTY will
+     * be used when the Windows build number is >= 18309 (it's available in 17134 and 17692 but is
+     * too unstable to enable by default).
+     *
+     * This setting does nothing on non-Windows.
+     */
+    experimentalUseConpty?: boolean;
   }
 
   /**
@@ -71,10 +80,9 @@ declare module 'node-pty' {
 
     /**
      * Kills the pty.
-     * @param signal The signal to use, defaults to SIGHUP. If the TIOCSIG/TIOCSIGNAL ioctl is not
-     * supported then the process will be killed instead. This parameter is not supported on
+     * @param signal The signal to use, defaults to SIGHUP. This parameter is not supported on
      * Windows.
-     * @throws Will throw when signal is used on Windows. 
+     * @throws Will throw when signal is used on Windows.
      */
     kill(signal?: string): void;
   }
